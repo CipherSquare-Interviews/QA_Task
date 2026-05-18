@@ -65,10 +65,7 @@ export default function Login() {
                     </button>
                 </form>
 
-                <div className="mt-6 text-center text-sm text-gray-500">
-                    <p>Demo credentials:</p>
-                    <p className="font-mono mt-1">9876543210 / password123</p>
-                </div>
+
             </div>
         </div>
     );
