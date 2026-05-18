@@ -10,8 +10,33 @@ A mobile recharge and wallet management application built with Laravel, React, a
 - **Database:** SQLite
 - **Styling:** Tailwind CSS
 - **Build:** Vite
+- **Testing:** Playwright
 
-## Setup Instructions
+## Quick Start (Docker)
+
+### Prerequisites
+
+- Docker & Docker Compose
+
+### Run the Application
+
+```bash
+docker compose up --build
+```
+
+The app will be available at [http://localhost:8000](http://localhost:8000)
+
+That's it. No PHP, no Node.js, no Composer required on your machine.
+
+### Reset Database
+
+To reset the database with fresh seed data:
+```bash
+docker compose down -v
+docker compose up --build
+```
+
+## Manual Setup (without Docker)
 
 ### Prerequisites
 
@@ -23,36 +48,23 @@ A mobile recharge and wallet management application built with Laravel, React, a
 ### Installation
 
 ```bash
-# Clone the repository
-git clone <repo-url> wallet-recharge-app
-cd wallet-recharge-app
-
-# Install PHP dependencies
 composer install
-
-# Install JS dependencies
 npm install
-
-# Create SQLite database
 touch database/database.sqlite
-
-# Run migrations and seed data
 php artisan migrate --seed
-
-# Start development server
-php artisan serve
 ```
 
-In a separate terminal:
+Run in two terminals:
+```bash
+php artisan serve
+```
 ```bash
 npm run dev
 ```
 
-### Access
+Open [http://localhost:8000](http://localhost:8000)
 
-Open [http://localhost:8000](http://localhost:8000) in your browser.
-
-### Test Credentials
+## Test Credentials
 
 | User | Mobile | Password |
 |------|--------|----------|
@@ -69,7 +81,7 @@ Open [http://localhost:8000](http://localhost:8000) in your browser.
 
 ## API Endpoints
 
-The application also exposes API-style endpoints for testing:
+The application exposes API-style endpoints for testing:
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -79,6 +91,56 @@ The application also exposes API-style endpoints for testing:
 | GET | /api/balance | Check wallet balance |
 
 All API endpoints require authentication (session cookie).
+
+## Running Playwright Tests
+
+### Install Playwright (first time only)
+
+```bash
+npm install
+npx playwright install chromium
+```
+
+### Run Tests
+
+```bash
+# Make sure the app is running (docker compose up OR manual setup)
+
+# Run all tests headless
+npm test
+
+# Run tests with browser visible
+npm run test:headed
+
+# Run tests with Playwright UI
+npm run test:ui
+
+# View test report after run
+npm run test:report
+```
+
+### Writing Tests
+
+Test files are in `tests/e2e/`. Example test files are provided as reference:
+
+- `login.spec.js` - Authentication tests
+- `dashboard.spec.js` - Dashboard verification
+- `recharge.spec.js` - Recharge flow tests
+- `transactions.spec.js` - Transaction history tests
+- `profile.spec.js` - Profile management tests
+
+Create new test files in the same directory following the Playwright test format:
+
+```javascript
+import { test, expect } from '@playwright/test';
+
+test.describe('Feature Name', () => {
+    test('should do something', async ({ page }) => {
+        await page.goto('/some-page');
+        await expect(page.locator('selector')).toBeVisible();
+    });
+});
+```
 
 ## Project Structure
 
@@ -95,4 +157,7 @@ resources/
   js/Layouts/          - Layout components
   views/               - Blade templates
 routes/web.php         - Route definitions
+tests/e2e/             - Playwright test files
+playwright.config.js   - Playwright configuration
+docker-compose.yml     - Docker setup
 ```
