@@ -3,6 +3,8 @@
 /.env
 /storage/*.key
 /database/database.sqlite
+/bootstrap/cache/*.php
 .phpunit.result.cache
 npm-debug.log
 yarn-error.log
+public/build/
