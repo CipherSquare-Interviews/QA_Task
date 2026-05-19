@@ -2,6 +2,16 @@
 
 A mobile recharge and wallet management application built with Laravel, React, and Inertia.js.
 
+## Candidate Task
+
+Your task is to:
+
+- understand the application flows and features
+- identify and write the relevant test cases that should be covered
+- automate those test cases using Playwright
+
+Candidates are expected to create their own test coverage for the application.
+
 ## Tech Stack
 
 - **Backend:** Laravel 11
@@ -121,15 +131,11 @@ npm run test:report
 
 ### Writing Tests
 
-Test files are in `tests/e2e/`. Example test files are provided as reference:
+Candidates should create their Playwright test files in `tests/e2e/`.
 
-- `login.spec.js` - Authentication tests
-- `dashboard.spec.js` - Dashboard verification
-- `recharge.spec.js` - Recharge flow tests
-- `transactions.spec.js` - Transaction history tests
-- `profile.spec.js` - Profile management tests
+The expectation is to define the scenarios worth testing and automate those scenarios using Playwright. Focus on the critical application flows such as authentication, dashboard behavior, wallet recharge, transactions, and profile management.
 
-Create new test files in the same directory following the Playwright test format:
+Create test files in `tests/e2e/` following the Playwright test format:
 
 ```javascript
 import { test, expect } from '@playwright/test';
